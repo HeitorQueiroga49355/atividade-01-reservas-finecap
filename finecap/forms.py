@@ -8,10 +8,11 @@ class ReservaForm(ModelForm):
     class Meta:
         model = Reserva
         fields = '__all__'
-        widgets = {
-            'cnpj': forms.TextInput(attrs={'class': 'form-control'}),
-            'nome_empresa': forms.TextInput(attrs={'class': 'form-control'}),
-            'categoria_empresa': forms.TextInput(attrs={'class': 'form-control'}),
-            'stand': forms.Select(),
-            'data': forms.DateInput(format='%d/%m/%Y')
-        }
+    widgets = {
+        'cnpj': forms.TextInput(attrs={'class': 'form-control'}),
+        'nome_empresa': forms.TextInput(attrs={'class': 'form-control'}),
+        'categoria_empresa': forms.TextInput(attrs={'class': 'form-control'}),
+        'stand': forms.Select(attrs={'class': 'form-control'}),
+        'data': forms.HiddenInput() ,
+        'quitado': forms.RadioSelect(attrs={'class': 'form-control'})
+    }

@@ -1,34 +1,11 @@
 {% extends 'base.html' %}
-
+{% load bootstrap5 %}
 {% block center %}
     <h2> Formulário de Matricula.</h2>
        
     <form method="post">
         {% csrf_token %}
-        <div class="mb-3">
-            <label for="cnpj" class="form-label">CNPJ</label>
-            {{ form.cnpj }}
-        </div>
-        
-        <div class="mb-3">
-            <label for="nome_empresa" class="form-label">Nome da empresa</label>
-            {{ form.nome_empresa }}
-        </div>
-
-        <div class="mb-3">
-            <label for="categoria_empresa" class="form-label">Categoria da empresa</label>
-            {{ form.categoria_empresa }}
-        </div>
-
-        <div class="mb-3">
-            <label for="stand" class="form-label">stand</label>
-            {{ form.stand }}
-        </div>
-
-        <div>
-            <label for="data_reserva" class="form-label">Data</label>
-            {{form.data}}
-        </div>
+        {% bootstrap_form form %}
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>    
 {% endblock %}

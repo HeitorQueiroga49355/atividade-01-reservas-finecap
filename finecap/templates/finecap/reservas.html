@@ -1,35 +1,107 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block center %}
+<h2>Lista de Alunos</h2>
 
-{% block center %}
-  <h2> Lista de Alunos</h2>
+<a href="{% url 'reserva_criar' %}" class="btn btn-success mb-3"
+  >Novo Cadastro</a
+>
+<form action="{% url 'reserva_listar' %}" method="get">
+  <div>
+    <input
+      placeholder="Nome Empresa"
+      type="text"
+      name="nome"
+      class="form-control"
+      value=""
+    />
+    <br/>
+    <label
+      for="quitado"
+      class="text-secondary"
+      style="margin-top: 5px; margin-left: 10px"
+      >Quitado</label
+    >
+    <input
+      id="quitado"
+      placeholder="Quitado"
+      type="radio"
+      name="search-payed"
+      class="form-check-input mx-3"
+      value="True"
+      style="margin-top: 10px"
+    />
+    <br/>
 
-  <a href="{% url 'reserva_criar' %}" class="btn btn-success mb-3">Novo Cadastro</a>
+    <label
+      for="quitado"
+      class="text-secondary"
+      style="margin-top: 5px; margin-left: 10px"
+      >Não quitado</label
+    >
+    <input
+      id="nao-quitado"
+      placeholder="Quitado"
+      type="radio"
+      name="search-payed"
+      class="form-check-input mx-3"
+      value="False"
+      style="margin-top: 10px"
+    />
+    <br/>
 
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>CNPJ</th>
-        <th>Nome da empresa</th>
-        <th>Categoria da empresa</th>
-        <th>Quitado</th>
-        <th>Localização</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for reserva in reservas %}  
-      <tr>
-        <td>{{ reserva.cnpj }}</td>
-        <td>{{ reserva.nome_empresa }}</td>
-        <td>{{ reserva.categoria_empresa }}</td>
-        <td>{{ reserva.quitado }}</td>
-        <td>{{ reserva.stand.localizacao }}</td>
-        <td>
-          <a href="{% url 'reserva_editar' id=reserva.id %}" class="btn btn-primary btn-sm">Editar</a>
-          <a href="{% url 'reserva_remover' id=reserva.id %}" class="btn btn-danger btn-sm">Remover</a>
-        </td>
-      </tr>
-      {% endfor %}
-    
-    </tbody>
-  </table>
+    <input
+      placeholder="Valor"
+      type="text"
+      name="valor"
+      class="form-control me-3"
+      value=""
+    />
+    <br/>
+
+    <input
+      placeholder="Data"
+      type="date"
+      name="data"
+      class="form-control"
+      value=""
+    />
+    <br/>
+
+    <button type="submit" class="btn btn-primary ms-3">Enviar</button>
+    <br/>
+  </div>
+</form>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>CNPJ</th>
+      <th>Nome da empresa</th>
+      <th>Categoria da empresa</th>
+      <th>Quitado</th>
+      <th>Localização</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for reserva in reservas %}
+    <tr>
+      <td>{{ reserva.cnpj }}</td>
+      <td>{{ reserva.nome_empresa }}</td>
+      <td>{{ reserva.categoria_empresa }}</td>
+      <td>{{ reserva.quitado }}</td>
+      <td>{{ reserva.stand.localizacao }}</td>
+      <td>
+        <a
+          href="{% url 'reserva_editar' id=reserva.id %}"
+          class="btn btn-primary btn-sm"
+          >Editar</a
+        >
+        <a
+          href="{% url 'reserva_remover' id=reserva.id %}"
+          class="btn btn-danger btn-sm"
+          >Remover</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}
