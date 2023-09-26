@@ -18,10 +18,28 @@ def reserva_criar(request):
 
 def reserva_listar(request):
     reservas = Reserva.objects.all()
-    context = {
-        'reservas': reservas
+
+    filter_name = request.GET.get('nome')
+    filter_value = request.GET.get('valor')
+    filter_quitado = request.GET.get('quitado')
+    filter_data = request.GET.get('data')
+
+
+    if filter_name:
+            reservas = reservas.filter(nome_empresa__icontains=filter_name)
+
+    if filter_value:
+        reservas = reservas.filter(stand__valor=filter_value)
+
+    if filter_quitado is not None:
+        reservas = reservas.filter(quitado=str(filter_quitado))
+
+    if filter_data:
+            reservas = reservas.filter(data__gte=searched_date)
+    context ={
+        'reservas':reservas
     }
-    return render(request, "finecap/reservas.html", context)
+    return render(request, "finecap/reservas.html",context)
 
 
 def reserva_remover(request, id):
