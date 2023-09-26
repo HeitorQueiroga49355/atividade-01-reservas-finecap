@@ -23,22 +23,22 @@ def reserva_listar(request):
     }
     return render(request, "finecap/reservas.html", context)
 
+
 def reserva_remover(request, id):
     aluno = get_object_or_404(Reserva, id=id)
     aluno.delete()
     return redirect('reserva_listar')
 
-def reserva_editar(request,id):
-    aluno = get_object_or_404(Reserva,id=id)
-   
+
+def reserva_editar(request, id):
+    reserva = get_object_or_404(Reserva, id=id)
     if request.method == 'POST':
-        form = ReservaForm(request.POST,instance=aluno)
+        form = ReservaForm(request.POST, instance=reserva)
 
         if form.is_valid():
             form.save()
             return redirect('reserva_listar')
     else:
-        form = ReservaForm(instance=aluno)
+        form = ReservaForm(instance=reserva)
 
-    return render(request,'finecap/form.html',{'form':form})
-
+    return render(request, 'finecap/form.html', {'form': form})

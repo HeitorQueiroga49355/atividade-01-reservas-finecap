@@ -12,5 +12,6 @@ class ReservaForm(ModelForm):
             'cnpj': forms.TextInput(attrs={'class': 'form-control'}),
             'nome_empresa': forms.TextInput(attrs={'class': 'form-control'}),
             'categoria_empresa': forms.TextInput(attrs={'class': 'form-control'}),
-            'stand': forms.Select()
+            'stand': forms.Select(),
+            'data': forms.DateInput(format='%d/%m/%Y')
         }
