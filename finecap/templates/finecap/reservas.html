@@ -6,6 +6,7 @@
 >
 <form action="{% url 'reserva_listar' %}" method="get">
   <div>
+    <input style='display: none' type='number' name='page' value='1' />
     <input
       placeholder="Nome Empresa"
       type="text"
@@ -13,7 +14,7 @@
       class="form-control"
       value=""
     />
-    <br/>
+    <br />
     <label
       for="quitado"
       class="text-secondary"
@@ -29,7 +30,7 @@
       value="True"
       style="margin-top: 10px"
     />
-    <br/>
+    <br />
 
     <label
       for="quitado"
@@ -46,7 +47,7 @@
       value="False"
       style="margin-top: 10px"
     />
-    <br/>
+    <br />
 
     <input
       placeholder="Valor"
@@ -55,7 +56,7 @@
       class="form-control me-3"
       value=""
     />
-    <br/>
+    <br />
 
     <input
       placeholder="Data"
@@ -64,10 +65,10 @@
       class="form-control"
       value=""
     />
-    <br/>
+    <br />
 
     <button type="submit" class="btn btn-primary ms-3">Enviar</button>
-    <br/>
+    <br />
   </div>
 </form>
 <table class="table table-bordered">
@@ -104,4 +105,8 @@
     {% endfor %}
   </tbody>
 </table>
-{% endblock %}
+{%if has_previous%}
+<a href="{% url 'reserva_listar' %}?page={{ previous_page}}">Previous</a>
+{%endif%} {%if has_next%}
+<a href="{% url 'reserva_listar' %}?page={{ next_page}}">Next</a>
+{%endif%} {% endblock %}
